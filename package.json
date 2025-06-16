@@ -11,10 +11,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "fastify": "^5.3.3"
+    "csvtojson": "^2.0.10",
+    "fastify": "^5.3.3",
+    "meilisearch": "^0.51.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.31",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }
