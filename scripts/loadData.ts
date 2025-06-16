@@ -26,18 +26,18 @@ export async function loadData() {
             const stats = await index.getStats()
             count = stats.numberOfDocuments
         } catch {
-            // índice no existe
+            // index does not exist
         }
 
         if (count > 0) {
-            console.log(`El índice "${INDEX_NAME}" ya tiene ${count} documentos.`)
+            console.info(`The index "${INDEX_NAME}" already has ${count} documents.`)
             return
         }
 
-        console.log('Cargando datos desde CSV...')
+        console.info('Loading data from CSV...')
 
         const records: Movie[] = await csv().fromFile(CSV_PATH)
-        console.log('Registros CSV parseados:', records.length)
+        console.info('Parsed CSV records:', records.length)
 
         const newIndex = await client.getIndex(INDEX_NAME).catch(async () => {
             await client.createIndex(INDEX_NAME, { primaryKey: 'id' })
@@ -45,9 +45,9 @@ export async function loadData() {
         })
 
         const task = await newIndex.addDocuments(records)
-        console.log('Documentos cargados. Task:', task.taskUid)
+        console.info('Documents uploaded. Task:', task.taskUid)
 
     } catch (err) {
-        console.error('Error al cargar CSV en Meilisearch:', err)
+        console.error('Error loading CSV into Meilisearch:', err)
     }
 }
